@@ -1,5 +1,13 @@
-FROM envoyproxy/envoy:v1.14.1
+FROM node:alpine
 
-COPY envoy.yaml /etc/envoy/envoy.yaml
+WORKDIR /usr/src/app
 
-CMD /usr/local/bin/envoy -c /etc/envoy/envoy.yaml -l trace --log-path /tmp/envoy_info.log
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 9090
+
+CMD [ "node", "server.js" ]

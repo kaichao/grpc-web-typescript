@@ -1,0 +1,17 @@
+version: '3.0'
+services:
+  server:
+    build: ./server
+    ports:
+    - "9090:9090"
+
+  proxy:
+    build: ./envoy
+    ports:
+    - "8080:8080"
+    - "9901:9901"
+
+  client:
+    build: ./client-typescript
+    ports:
+    - "1234:1234"

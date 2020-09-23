@@ -5,29 +5,29 @@ envoy proxy and typescript/javascript client
 
 The code is taken from official grpc-web repo https://github.com/grpc/grpc-web/tree/master/net/grpc/gateway/examples/helloworld and modified to make it easier to understand the code and execute.
 
-## Running Server with proxy
-
-Go to server directory and run the following command to start the docker
-containers using `docker-compose`
+## Running this example ( client + proxy + server )
 
 ```
-docker-compose up
+# compile the proto file
+make protoc
+
+# build the docker images
+make build
+
+# start the docker containers
+make up
+
+# shutdown the docker containers
+make down
+
+# clean all protoc-generated files and build-generated docker images 
+make clean
 ```
 
-The grpc server should be started along with envoy proxy which the UI can
-connect to. Open `localhost:8080` to verify the same
+Open `http://localhost:9901` to access the envoy admin UI.
 
+Open Chrome with developer console, and type `http://localhost:1234` to access the client UI.
 
-## Running typescript/javascript client
-
-go to `client-typescript` directory and run the following commands to start
-client
-
-```
-npm install
-npm start
-```
-
-The typescript compiled files are included in the folder. If you want to change
-the typescript code, modify the `main.ts` file and compile using `tsc` command.
-Or modify the `main.js` directly.
+The typescript compiled files are included in `client-typescript` directory. 
+If you want to change the typescript code, modify the `main.ts` file and compile 
+using `tsc` command. Or modify the `main.js` directly.
